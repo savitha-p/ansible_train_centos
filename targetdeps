@@ -1,0 +1,11 @@
+#!/bin/bash
+#yum upgrade -y
+yum install bridge-utils iputils lsof lvm2 chrony openssh-server sudo tcpdump python -y
+echo 'bonding' >> /etc/modules-load.d/openstack-ansible.conf
+echo '8021q' >> /etc/modules-load.d/openstack-ansible.conf
+systemctl enable chronyd.service
+systemctl start chronyd.service
+systemctl stop firewalld
+systemctl disable firewalld
+systemctl stop NetworkManager
+systemctl disable NetworkManager 

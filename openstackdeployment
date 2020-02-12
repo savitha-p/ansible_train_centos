@@ -1,0 +1,17 @@
+#!/bin/bash
+cp -rf /opt/openstack-ansible/etc/openstack_deploy /etc/openstack_deploy
+mkdir /etc/openstack_deploy/ssl
+git clone https://github.com/prashantsakharkar/certs.git /etc/openstack_deploy/ssl
+
+git clone https://github.com/prashantsakharkar/ansible_config.git /tmp/test
+cp -rvf /tmp/test/* /etc/openstack_deploy/
+
+cd /opt/openstack-ansible/ && ./scripts/pw-token-gen.py --file /etc/openstack_deploy/user_secrets.yml
+
+cd /opt/openstack-ansible/playbooks/ && /usr/local/bin/openstack-ansible setup-hosts.yml
+
+cd /opt/openstack-ansible/playbooks/ && /usr/local/bin/openstack-ansible setup-infrastructure.yml
+
+cd /opt/openstack-ansible/playbooks/ && /usr/local/bin/openstack-ansible setup-openstack.yml
+
+yum install python-openstackclient -y

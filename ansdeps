@@ -1,0 +1,9 @@
+#!/bin/bash
+#######install ansible host dependencies
+sudo yum upgrade -y
+sudo yum install https://rdoproject.org/repos/openstack-train/rdo-release-train.rpm -y
+sudo yum install sshpass git ntp ntpdate openssh-server python-devel sudo '@Development Tools' -y
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+systemctl stop firewalld
+systemctl mask firewalld

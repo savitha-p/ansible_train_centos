@@ -1,0 +1,47 @@
+#!/bin/bash
+
+echo "TYPE=Ethernet
+BOOTPROTO=static
+DEVICE=eth1
+ONBOOT=yes
+BRIDGE=br-mgmt1" > /etc/sysconfig/network-scripts/ifcfg-eth1
+
+echo "TYPE=Bridge
+BOOTPROTO=static
+DEVICE=br-mgmt1
+METRIC=0
+ONBOOT=yes
+IPADDR=172.172.3.236
+NETMASK=255.255.255.0
+GATEWAY=172.172.3.1" > /etc/sysconfig/network-scripts/ifcfg-br-mgmt1
+
+echo "TYPE=Ethernet
+BOOTPROTO=static
+DEVICE=eth2
+ONBOOT=yes
+BRIDGE=br-mgmt" > /etc/sysconfig/network-scripts/ifcfg-eth2
+
+echo "TYPE=Bridge
+BOOTPROTO=static
+DEVICE=br-mgmt
+METRIC=1
+ONBOOT=yes
+IPADDR=10.10.10.14
+NETMASK=255.255.255.0
+GATEWAY=10.10.10.1" > /etc/sysconfig/network-scripts/ifcfg-br-mgmt
+
+echo "TYPE=Ethernet
+BOOTPROTO=static
+DEVICE=eth3
+ONBOOT=yes
+BRIDGE=br-storage" > /etc/sysconfig/network-scripts/ifcfg-eth3
+
+echo "TYPE=Bridge
+BOOTPROTO=static
+DEVICE=br-storage
+METRIC=2
+ONBOOT=yes
+IPADDR=10.10.10.15
+NETMASK=255.255.255.0
+GATEWAY=10.10.10.1" > /etc/sysconfig/network-scripts/ifcfg-br-storage
+

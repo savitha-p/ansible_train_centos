@@ -1,0 +1,6 @@
+#!/bin/bash
+parted -a optimal /dev/sda mkpart primary 35GB 215GB
+pvcreate /dev/sda3
+vgextend centos_centos7 /dev/sda3
+lvextend -L +167G /dev/centos_centos7/root
+xfs_growfs /dev/centos_centos7/root

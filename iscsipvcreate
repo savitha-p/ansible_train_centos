@@ -1,0 +1,3 @@
+#!/bin/bash
+pvcreate --metadatasize 2048 /dev/vda
+vgcreate cinder-volumes /dev/vda

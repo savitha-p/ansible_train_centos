@@ -1,0 +1,20 @@
+#!/bin/bash
+     
+echo "10.10.10.4	controller
+      10.10.10.6	compute
+      10.10.10.8        mon
+      10.10.10.10       osd1
+      10.10.10.12	osd2
+      10.10.10.14	osd3
+      10.10.10.16	iscsi" > /etc/hosts
+
+
+ssh-keygen -t rsa -N "" -f /root/.ssh/my.key
+touch /root/.ssh/authorized_keys
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@controller
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@compute
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@mon
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@osd1
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@osd2
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@osd3
+sudo sshpass -p 'linuxpassword' ssh-copy-id -o StrictHostKeyChecking=no root@iscsi
