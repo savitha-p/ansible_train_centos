@@ -52,7 +52,9 @@ Vagrant.configure("2") do |config|
   controller.vm.provision :shell, :path => "targetdeps"
   controller.vm.provision :shell, :path => "controllerbridge"
   controller.vm.provision :shell, :path => "disksize"
+  controller.vm.provision "shell",run: "always",inline: "sed -i '/SELINUX=enforcing/c SELINUX=disabled' /etc/sysconfig/selinux"
   controller.vm.provision :reload
+  controller.vm.provision "shell",run: "always",inline: "setenforce 0"
   end
 
 ###########################compute configuration#########################
@@ -74,8 +76,11 @@ Vagrant.configure("2") do |config|
   compute.vm.provision :shell, :path => "targetdeps"
   compute.vm.provision :shell, :path => "computebridge"
   compute.vm.provision :shell, :path => "disksize"
+  compute.vm.provision "shell",run: "always",inline: "sed -i '/SELINUX=enforcing/c SELINUX=disabled' /etc/sysconfig/selinux"   
   compute.vm.provision :reload
+  compute.vm.provision "shell",run: "always",inline: "setenforce 0"   
   end
+
 ##########################cephmon configuration#########################
   config.vm.define "mon" do |mon|
     mon.vm.provider :libvirt do |mon|
